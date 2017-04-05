@@ -1,0 +1,51 @@
+{
+  "name": "generation-take-home-cra",
+  "version": "0.0.1",
+  "description": "Coding challenge for generation interview",
+  "main": "server.js",
+  "scripts": {
+    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "node server.js",
+    "client": "node start-client.js",
+    "test": "cd client && run npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/manduks/generation-take-home-cra.git"
+  },
+  "keywords": [
+    "generation",
+    "react",
+    "generation"
+  ],
+  "author": "Armando Gonzalez",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/manduks/generation-take-home-cra/issues"
+  },
+  "homepage": "https://github.com/manduks/generation-take-home-cra#readme",
+  "dependencies": {
+    "ecstatic": "^1.4.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "^7.1.1",
+    "concurrently": "^3.4.0",
+    "eslint": "^3.16.1",
+    "eslint-config-airbnb": "^14.1.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^4.0.0",
+    "eslint-plugin-react": "^6.10.0"
+  },
+  "eslintConfig": {
+    "parser": "babel-eslint",
+    "parserOptions": {
+      "allowImportExportEverywhere": true
+    },
+    "extends": [
+      "airbnb"
+    ],
+    "rules": {
+      "react/forbid-prop-types": 0
+    }
+  }
+}
