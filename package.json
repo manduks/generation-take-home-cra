@@ -7,7 +7,8 @@
     "start": "concurrently \"npm run server\" \"npm run client\"",
     "server": "node server.js",
     "client": "node start-client.js",
-    "test": "cd client && run npm test"
+    "test": "cd client && run npm test",
+    "prod": "PORT=3000 node server.js"
   },
   "repository": {
     "type": "git",

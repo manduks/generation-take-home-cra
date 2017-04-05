@@ -13,5 +13,5 @@ http
     return serveStaticFiles(req, res);
   })
   .listen(port);
-
-console.log('Listening on http://localhost:%d', port);
+  
+console.log('Listening on http://localhost:%d', port);// eslint-disable-line no-console

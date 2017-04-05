@@ -1,6 +1,4 @@
 let makersReadyToRender = [];
-let index = 0;
-let errors = 0;
 const MARKERSCACHE = JSON.parse(localStorage.getItem('markers')) || {};
 const markersIds = {};
 
@@ -20,8 +18,6 @@ function fetchLatLongs(markers, maps, callback) {
         );
       })(nextAddress++);
     } else {
-      // We're done.
-      console.log(makersReadyToRender.length);
       console.log("Finish loading markers");
     }
   }
@@ -36,20 +32,18 @@ function fetchLatLongs(markers, maps, callback) {
       address = address.split(/C.P|\sCP|ENTRE/)[0];
       return geocoder.geocode({address: address}, function(results, status) {
         if (status === maps.GeocoderStatus.OK) {
-          index += 1;
           position = results[0];
           location = position.geometry.location;
 
           if (!markersIds[position.place_id]) { //Avoid duplicates
             marker.lat = location.lat();
             marker.lng = location.lng();
-            marker.key = position.place_id;
-            marker.index = index;
             makersReadyToRender.push(marker);
             callback(makersReadyToRender); // we set the maker to the map
+
             //saving in local database for faster rendering next time
             MARKERSCACHE[marker.Name] = marker;
-            markersIds[marker.key] = true;
+            markersIds[position.place_id] = true;
             localStorage.setItem('markers', JSON.stringify(MARKERSCACHE));
           }
 
@@ -74,6 +68,11 @@ function fetchLatLongs(markers, maps, callback) {
   getNextMarker();
 }
 
-const Map = {fetchLatLongs};
+function addToFavs(name) {
+  MARKERSCACHE[name].favorite = true;
+  localStorage.setItem('markers', JSON.stringify(MARKERSCACHE));
+}
+
+const Map = {fetchLatLongs, addToFavs};
 
 export default Map;

@@ -1,14 +1,44 @@
 .marker {
-  position: absolute;
-  width: 20px;
-  height: 20px;
-  left: 10px;
-  top: 10px;
+  position: relative;
+  width: 30px;
+  height: 30px;
+  left: 15px;
+  top: 15px;
   border: 5px solid #00adef;
-  border-radius: 20px;
+  border-radius: 30px;
   background-color: white;
-  text-align: center;
   font-size: 16px;
   font-weight: bold;
   padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.favorite {
+  background-color: #00adef;
+  color: white;
+}
+
+/**
+ * Tooltip Styles
+ */
+.tooltiptext {
+  visibility: hidden;
+  width: 250px;
+  background-color: #000;
+  background-color: hsla(0, 0%, 20%, 0.9);
+  color: #fff;
+  text-align: center;
+  border-radius: 3px;
+  padding: 5px 0;
+  text-align: center;
+  font-size: 14px;
+  line-height: 1.2;
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+ }
+.tooltip:hover .tooltiptext {
+  visibility: visible;
 }

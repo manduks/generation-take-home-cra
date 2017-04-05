@@ -16,54 +16,26 @@ class App extends Component {
     this.onMapLoaded = this.onMapLoaded.bind(this);
     this.loadMarkers = this.loadMarkers.bind(this);
     this.updateMakers = this.updateMakers.bind(this);
-    this.startLazyLoading = this.startLazyLoading.bind(this);
-    this.loadNextBatch = this.loadNextBatch.bind(this);
     this.state = {
       markers: [],
     };
-    this.params = {
-      limit: 10,
-      page: 1,
-    };
-  }
-  componentWillUnmount() {
-    clearInterval(this.interval);
   }
   updateMakers(markers) {
     this.setState({
       markers,
     });
   }
-  startLazyLoading() {
-    this.interval = setInterval(
-      () => {
-        this.loadNextBatch();
-      },
-      5 * 1000,
-    );
-  }
-  loadNextBatch() {
-    const params = this.params;
-    this.params.skip = params.limit * params.page;
-    this.params.page += 1;
-    return this.loadMarkers();
-  }
   loadMarkers() {
-    API.search(this.params, markers => {
-      console.log(markers);
-      if (markers.length === 0) {
-        return clearInterval(this.interval);
-      }
+    API.search({}, markers => {
       return Map.fetchLatLongs(markers, this.maps, this.updateMakers);
     });
   }
   renderMarkers() {
-    return this.state.markers.map(m => <Marker {...m} />);
+    return this.state.markers.map((m, i)=> <Marker key={i} index={i} {...m} />);
   }
   onMapLoaded({map, maps}) {
     this.maps = maps;
     this.loadMarkers();
-    //this.startLazyLoading();
   }
   render() {
     return (
