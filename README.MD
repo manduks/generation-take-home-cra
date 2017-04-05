@@ -1,4 +1,4 @@
-# Intalling instructions
+# Installing instructions
 
 This project has [Create React App CLI](https://github.com/facebookincubator/create-react-app)  integration.
 
